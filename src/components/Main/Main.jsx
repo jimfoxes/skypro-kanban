@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { cardList } from "../../data";
 import { Column } from "../Column/Column";
-
+import * as S from "./Main.styled";
+import { Container } from "../Styles/globalStyles";
 
 
 export const Main = () => {
@@ -22,11 +23,11 @@ export const Main = () => {
   ];
   
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-          {isLoading ? (<div className="loading-text">Данные загружаются...</div>) : ( columns.map((column) => 
+    <S.main>
+      <Container>
+        <S.mainBlock>
+          <S.mainContent>
+          {isLoading ? (<S.loadingText>Данные загружаются...</S.loadingText>) : ( columns.map((column) => 
             (
               <Column
                 key={column.title}
@@ -35,10 +36,10 @@ export const Main = () => {
                 
                 />
             )))}
-          </div>
+          </S.mainContent>
 
-        </div>
-      </div>
-    </main>
+        </S.mainBlock>
+      </Container>
+    </S.main>
   );
 };
