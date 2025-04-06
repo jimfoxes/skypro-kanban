@@ -6,6 +6,10 @@ import { PopExit } from './components/PopExit/PopExit'
 import { PopNewCard } from './components/PopNewCard/PopNewCard'
 
 
+
+
+
+
 function App() {  
 
   return (

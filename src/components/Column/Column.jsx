@@ -1,24 +1,24 @@
 import { Card } from "../Card/Card";
+import * as S from "./Column.styled"
 
 export const Column = ({ title, cards }) => {
     return (
-  <div className="main__column column">
-    <div className="column__title">
+  <S.mainColumn>
+    <S.columnTitle>
       <p>{ title }</p>
-    </div>
-    <div className="cards">
+    </S.columnTitle>
+    <S.cards>
       {cards.map((card) => (    
    
         <Card
           key={card.id}
           theme={card.theme}
           title={card.title}
-          date={card.date} 
-        
+          date={card.date}         
         /> 
       ))} 
-    </div>
-  </div>
+    </S.cards>
+  </S.mainColumn>
     );
 };
 
