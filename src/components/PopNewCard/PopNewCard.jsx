@@ -1,44 +1,45 @@
-import { Calendar } from "../Calendar/Calendar";
-
-export const PopNewCard = () => {
-    return (
-    <div className="pop-new-card" id="popNewCard">
-        <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-            <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">&#10006;</a>
-            <div className="pop-new-card__wrap">
-                <form className="pop-new-card__form form-new" id="formNewCard" action="#">
-                <div className="form-new__block">
-                    <label htmlFor="formTitle" className="subttl">Название задачи</label>
-                    <input className="form-new__input" type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus/>
-                </div>
-                <div className="form-new__block">
-                    <label htmlFor="textArea" className="subttl">Описание задачи</label>
-                    <textarea className="form-new__area" name="text" id="textArea"  placeholder="Введите описание задачи..."></textarea>
-                </div>
-                </form>
-                < Calendar />
-            </div>
-            <div className="pop-new-card__categories categories">
-                <p className="categories__p subttl">Категория</p>
-                <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                    <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                    <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                    <p className="_purple">Copywriting</p>
-                </div>
-                </div>
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
-            </div>
-        </div>
-        </div>
-    </div>
-    );
-}
+import * as S from './PopNewCard.styled';
+  import { Calendar } from "../Calendar/Calendar";
+  
+  export const PopNewCard = () => {
+      return (
+        <S.PopNewCardWrapper id="popNewCard">
+          <S.PopNewCardContainer>
+            <S.PopNewCardBlock>
+              <S.PopNewCardContent>
+                <S.PopNewCardTitle>Создание задачи</S.PopNewCardTitle>
+                <S.PopNewCardClose to={-1}>&#10006;</S.PopNewCardClose>
+                <S.PopNewCardWrap>
+                  <S.PopNewCardForm id="formNewCard" action="#">
+                    <S.FormNewBlock>
+                      <S.Subtitle htmlFor="formTitle">Название задачи</S.Subtitle>
+                      <S.FormNewInput type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus/>
+                    </S.FormNewBlock>
+                    <S.FormNewBlock>
+                      <S.Subtitle htmlFor="textArea">Описание задачи</S.Subtitle>
+                      <S.FormNewArea name="text" id="textArea" placeholder="Введите описание задачи..."></S.FormNewArea>
+                    </S.FormNewBlock>
+                  </S.PopNewCardForm>
+                  <Calendar />
+                </S.PopNewCardWrap>
+                <S.CategoriesWrapper>
+                  <S.CategoriesParagraph><S.Subtitle>Категория</S.Subtitle></S.CategoriesParagraph>
+                  <S.CategoriesThemes>
+                    <S.CategoryTheme className="orange" $active={true}>
+                      <p>Web Design</p>
+                    </S.CategoryTheme>
+                    <S.CategoryTheme className="green">
+                      <p>Research</p>
+                    </S.CategoryTheme>
+                    <S.CategoryTheme className="purple">
+                      <p>Copywriting</p>
+                    </S.CategoryTheme>
+                  </S.CategoriesThemes>
+                </S.CategoriesWrapper>
+                <S.FormNewCreate id="btnCreate">Создать задачу</S.FormNewCreate>
+              </S.PopNewCardContent>
+            </S.PopNewCardBlock>
+          </S.PopNewCardContainer>
+        </S.PopNewCardWrapper>
+      );
+  }
