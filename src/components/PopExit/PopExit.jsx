@@ -1,12 +1,15 @@
 import * as S from "./PopExit.styled";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
-export const PopExit = ({ setIsAuth }) => {
+export const PopExit = () => {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = (e) => {
     e.preventDefault();
-    setIsAuth(false);
-    navigate("/");
+    logout()
+    navigate("/login");
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PopUser } from "../PopUser/PopUser";
 import { Container } from "../Styles/globalStyles";
 import * as S from "./Header.styled/";
