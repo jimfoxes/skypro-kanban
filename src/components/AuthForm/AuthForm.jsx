@@ -23,10 +23,10 @@ export const AuthForm = ({ isSignUp }) => {
 
   const [error, setError] = useState("");
 
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
+  // const validateEmail = (email) => {
+  //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   return re.test(email);
+  // };
 
   const validateForm = () => {
     const newErrors = { name: false, email: false, password: false };
@@ -42,7 +42,8 @@ export const AuthForm = ({ isSignUp }) => {
       isValid = false;
     }
 
-    if (!formData.email.trim() || !validateEmail(formData.email)) {
+    // if (!formData.email.trim() || !validateEmail(formData.email)) {
+    if (!formData.email.trim()) {
       newErrors.email = true;
       setError(
         !isSignUp
