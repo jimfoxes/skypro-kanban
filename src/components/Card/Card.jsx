@@ -1,8 +1,7 @@
+import { Link } from "react-router-dom";
 import * as S from './Card.styled'
 
-export const Card = ({ theme, title, date }) => {
-
-
+export const Card = ({id, theme, title, date }) => {
 
     return (
   <S.cardsItem>
@@ -11,13 +10,13 @@ export const Card = ({ theme, title, date }) => {
         <S.cardTheme $theme={theme}>
           <p>{theme}</p>
         </S.cardTheme>
-        <a href="#popBrowse" target="_self">
+        <Link to={`/card/${id}`}>
           <S.cardBtn>
             <S.cardBtnDot />
             <S.cardBtnDot />
             <S.cardBtnDot />
           </S.cardBtn>
-        </a>
+        </Link>
       </S.cardGroup>
       <S.cardContent>
         <a href="" target="_blank">

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PopUser } from "../PopUser/PopUser";
 import { Container } from "../Styles/globalStyles";
-import * as S from "./Header.styled/"
+import * as S from "./Header.styled/";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [isPopUserVisible, setIsPopUserVisible] = useState(false);
-  const [isDark, setIsDark] = useState(false); 
+  const [isDark, setIsDark] = useState(false);
+  const popUserRef = useRef(null);
+  const userButtonRef = useRef(null);
 
   const toggleDarkMode = () => {
     setIsDark(!isDark);
@@ -17,47 +20,54 @@ export const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-        if (isPopUserVisible && !event.target.closest('.header__pop-user-set')) {
-            setIsPopUserVisible(false);
-        }
+      
+      if (
+        popUserRef.current &&
+        !popUserRef.current.contains(event.target)  &&
+        userButtonRef.current &&
+        !userButtonRef.current.contains(event.target)
+      ) {
+        setIsPopUserVisible(false);
+      }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    
+    if (isPopUserVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isPopUserVisible]);
 
-    return (
-  <S.header>
-    <Container>
-      <S.headerBlock>
-      {isDark ? (
+  return (
+    <S.header>
+      <Container>
+        <S.headerBlock>
+          {isDark ? (
             <S.headerLogoDark>
-              <a href="" target="_self">
-                <img src="images/logo_dark.png" alt="logo" />
-              </a>
+              <Link to="/">
+                <img src="/images/logo_dark.png" alt="logo" />
+              </Link>
             </S.headerLogoDark>
           ) : (
             <S.headerLogo>
-              <a href="" target="_self">
-                <img src="images/logo.png" alt="logo" />
-              </a>
+              <Link to="/">
+                <img src="/images/logo.png" alt="logo" />
+              </Link>
             </S.headerLogo>
           )}
-        <S.headerNav>
-          <S.headerButton id="btnMainNew">
-            <a href="#popNewCard">Создать новую задачу</a>
-          </S.headerButton>
-          <S.headerUser href="#user-set-target" onClick={togglePopUser}>
-            Ivan Ivanov
-          </S.headerUser>
-          {isPopUserVisible && <PopUser />}
-        </S.headerNav>
-      </S.headerBlock>
-    </Container>
-  </S.header>
-    );
+          <S.headerNav>
+            <S.headerButton id="btnMainNew">
+              <Link to="card/new">Создать новую задачу</Link>
+            </S.headerButton>
+            <S.headerUser ref={userButtonRef} onClick={togglePopUser}>Ivan Ivanov</S.headerUser>
+            <div ref={popUserRef}>
+            <PopUser $isPopUserVisible={isPopUserVisible} />
+            </div>
+          </S.headerNav>
+        </S.headerBlock>
+      </Container>
+    </S.header>
+  );
 };
-

@@ -10,7 +10,7 @@ export const Main = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false); // Через 2 секунды "загрузка" завершается
+      setIsLoading(false); 
     }, 500);
   }, []);
 

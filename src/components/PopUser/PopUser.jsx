@@ -1,20 +1,17 @@
-export const PopUser = () => {
+import * as S from './PopUser.styled';
+
+export const PopUser = ({ $isPopUserVisible }) => {
     return (
-        <>
-        <div
-        className="header__pop-user-set pop-user-set"
-        id="user-set-target"
-      >
-        <p className="pop-user-set__name">Ivan Ivanov</p>
-        <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-        <div className="pop-user-set__theme">
-          <p>Темная тема</p>
-          <input type="checkbox" className="checkbox" name="checkbox" />
-        </div>
-        <button type="button" className="_hover03">
-          <a href="#popExit">Выйти</a>
-        </button>
-      </div>
-      </>
+        <S.PopUserContainer $isPopUserVisible={$isPopUserVisible}>
+            <S.PopUserName>Ivan Ivanov</S.PopUserName>
+            <S.PopUserMail>ivan.ivanov@gmail.com</S.PopUserMail>
+            <S.PopUserTheme>
+                <p>Темная тема</p>
+                <S.ThemeCheckbox name="checkbox" />
+            </S.PopUserTheme>
+            <S.PopUserButton>
+                <S.PopUserLink to="exit">Выйти</S.PopUserLink>
+            </S.PopUserButton>
+        </S.PopUserContainer>
     )
 }

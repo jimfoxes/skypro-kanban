@@ -45,6 +45,12 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #F1F1F1;
     }
 
+    div,
+    button,
+    a {
+        font-family: "Roboto", sans-serif;
+    }
+
 `;
 
 export const Container = styled.div`
