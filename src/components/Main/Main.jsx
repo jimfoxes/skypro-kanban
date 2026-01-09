@@ -6,8 +6,38 @@ import { useContext } from "react";
 
 
 export const Main = () => {
-  const { tasks, loading} = useContext(TasksContext); 
+  const { tasks, loading, error } = useContext(TasksContext); 
   console.log(tasks)
+
+  if (error) {
+    return <ErrorMessage>Ошибка загрузки данных</ErrorMessage>;
+  }
+  
+  // Состояние загрузки
+  if (loading) {
+    return (
+      <S.main>
+        <Container>
+          <S.mainBlock>
+            <S.loadingText>Загрузка задач...</S.loadingText>
+          </S.mainBlock>
+        </Container>
+      </S.main>
+    );
+  }
+  
+  // Если tasks пуст, но не загружается
+  if (!tasks || tasks.length === 0) {
+    return (
+      <S.main>
+        <Container>
+          <S.mainBlock>
+            <S.loadingText>Нет задач</S.loadingText>
+          </S.mainBlock>
+        </Container>
+      </S.main>
+    );
+  }
 
   const columns = [
     { title: 'Без статуса' },
@@ -22,7 +52,7 @@ export const Main = () => {
       <Container>
         <S.mainBlock>
           <S.mainContent>
-          {loading ? (<S.loadingText>Данные загружаются...</S.loadingText>) : ( columns.map((column) => 
+          { columns.map((column) => 
             (
               <Column
                 key={column.title}
@@ -30,7 +60,7 @@ export const Main = () => {
                 cards={tasks.filter((task) => task.status === column.title)}
                 
                 />
-            )))}
+            ))}
           </S.mainContent>
 
         </S.mainBlock>

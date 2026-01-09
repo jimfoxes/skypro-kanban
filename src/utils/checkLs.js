@@ -1,7 +1,9 @@
 export function checkLs() {
     try {
-        return window.localStorage.getItem('userInfo') ? JSON.parse(window.localStorage.getItem('userInfo')) : null
-    } catch {
+        const userInfo = window.localStorage.getItem('userInfo');
+        return userInfo ? JSON.parse(userInfo) : null
+    } catch (error) {
+        console.error("Ошибка при чтении localStorage:", error);
         return null
     }
 }
