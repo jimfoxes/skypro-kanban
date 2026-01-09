@@ -276,3 +276,10 @@ export const ButtonBrowse = styled.button`
 export const HiddenContent = styled.div`
   display: none;
 `;
+
+export const LoadingText = styled.p`
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+  padding: 20px;
+`;

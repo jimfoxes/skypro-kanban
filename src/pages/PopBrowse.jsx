@@ -1,10 +1,12 @@
-import { PopBrowse } from '../components/PopBrowse/PopBrowse'
-import { useParams } from 'react-router-dom'
-import { cardList } from '../data'
+import { useContext } from "react";
+import { PopBrowse } from "../components/PopBrowse/PopBrowse";
+import { useParams } from "react-router-dom";
+import { TasksContext } from "../context/TasksContext";
 
 export const PopBrowsePage = () => {
-    const { id } = useParams()
-    const card = cardList.find(card => card.id === Number(id))
+  const { tasks, loading } = useContext(TasksContext); 
+  const { id } = useParams();
+  const card = tasks.find((task) => task._id === id);
 
-    return <PopBrowse card={card}/>
-}
+  return <PopBrowse card={card} loading={loading}/>;
+};
