@@ -89,13 +89,43 @@ export const PopNewCardWrap = styled.div`
 `;
 
 export const PopNewCardForm = styled.form`
-  max-width: 370px;
+  /* max-width: 370px; */
   width: 100%;
   display: block;
   margin-bottom: 20px;
 
   @media screen and (max-width: 495px) {
     max-width: 100%;
+  }
+`;
+
+export const FormContentWrapper = styled.div`
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+`;
+
+export const FormLeftColumn = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const FormRightColumn = styled.div`
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
   }
 `;
 
@@ -185,6 +215,11 @@ export const CategoriesThemes = styled.div`
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+`;
+
+export const FormWithCalendar = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const CategoryTheme = styled.div`

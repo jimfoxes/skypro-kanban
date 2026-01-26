@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthForm.styled";
 import { signIn, signUp } from "../../services/auth";
 import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
 
 export const AuthForm = ({ isSignUp }) => {
   const navigate = useNavigate();
@@ -30,8 +29,8 @@ export const AuthForm = ({ isSignUp }) => {
 
   const validateForm = () => {
     const newErrors = { name: false, email: false, password: false };
-
     let isValid = true;
+    
     if (isSignUp && !formData.name.trim()) {
       newErrors.name = true;
       setError(

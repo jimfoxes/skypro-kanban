@@ -1,12 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { PopBrowse } from "../components/PopBrowse/PopBrowse";
 import { useParams } from "react-router-dom";
 import { TasksContext } from "../context/TasksContext";
 
 export const PopBrowsePage = () => {
-  const { tasks, loading } = useContext(TasksContext); 
+  const { tasks } = useContext(TasksContext); 
   const { id } = useParams();
-  const card = tasks.find((task) => task._id === id);
+  const [card, setCard] = useState(null);
+   const [loading, setLoading] = useState(false);
 
-  return <PopBrowse card={card} loading={loading}/>;
+  useEffect(() => {
+    setLoading(true);
+    const foundCard = tasks.find((task) => task._id === id);
+    setCard(foundCard || null);
+    setLoading(false);
+  }, [id, tasks]);
+
+  return <PopBrowse card={card} loading={loading} id={id}/>;
 };

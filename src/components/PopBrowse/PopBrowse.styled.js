@@ -252,6 +252,9 @@ export const ButtonBrowse = styled.button`
   color: ${(props) => (props.$bordered ? "#565EEF" : "#FFFFFF")};
   cursor: pointer;
   margin-right: ${props => props.$group ? '8px' : '0'};
+  font-size: 14px;
+  font-weight: 500;
+  
   a {
     color: ${(props) => (props.$bordered ? "#565EEF" : "#FFFFFF")};
     text-decoration: none;
