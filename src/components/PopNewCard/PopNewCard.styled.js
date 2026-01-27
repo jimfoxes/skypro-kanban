@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const PopNewCardWrapper = styled.div`
   width: 100%;
@@ -36,12 +36,12 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid #d4dbe5;
   position: relative;
 
   @media screen and (max-width: 660px) {
@@ -70,7 +70,7 @@ export const PopNewCardClose = styled(Link)`
   position: absolute;
   top: 20px;
   right: 30px;
-  color: #94A6BE;
+  color: #94a6be;
   cursor: pointer;
 
   &:hover {
@@ -92,7 +92,7 @@ export const PopNewCardForm = styled.form`
   /* max-width: 370px; */
   width: 100%;
   display: block;
-  margin-bottom: 20px;
+
 
   @media screen and (max-width: 495px) {
     max-width: 100%;
@@ -101,8 +101,7 @@ export const PopNewCardForm = styled.form`
 
 export const FormContentWrapper = styled.div`
   display: flex;
-  gap: 30px;
-  margin-bottom: 20px;
+  gap: 20px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -139,7 +138,6 @@ const baseInputStyles = `
   outline: none;
   padding: 14px;
   background: transparent;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
@@ -156,11 +154,15 @@ const baseInputStyles = `
 
 export const FormNewInput = styled.input`
   ${baseInputStyles}
-  margin: 20px 0;
+  border: 0.7px solid ${(props) =>
+    props.$error ? "rgba(248, 77, 77, 0.8)" : "rgba(148, 166, 190, 0.4)"};
+  margin-top: 20px;
 `;
 
 export const FormNewArea = styled.textarea`
   ${baseInputStyles}
+  border: 0.7px solid ${(props) =>
+    props.$error ? "rgba(248, 77, 77, 0.8)" : "rgba(148, 166, 190, 0.4)"};
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
@@ -174,14 +176,14 @@ export const FormNewArea = styled.textarea`
 export const FormNewCreate = styled.button`
   width: 132px;
   height: 30px;
-  background-color: #565EEF;
+  background-color: #565eef;
   border-radius: 4px;
   border: 0;
   outline: none;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  color: #FFFFFF;
+  color: #ffffff;
   float: right;
   cursor: pointer;
 
@@ -222,17 +224,27 @@ export const FormWithCalendar = styled.div`
   justify-content: center;
 `;
 
-export const CategoryTheme = styled.div`
+export const error = styled.p`
+  color: rgb(248, 77, 77);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 7px;
+`;
+
+export const CategoriesTheme = styled.div`
   display: inline-block;
   width: auto;
   height: 30px;
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
+  margin-top: 14px;
   opacity: 0.4;
   cursor: pointer;
 
-  ${({ $active }) => $active && 'opacity: 1;'}
+  ${({ $active }) => $active && "opacity: 1;"}
 
   p {
     font-size: 14px;
@@ -242,22 +254,22 @@ export const CategoryTheme = styled.div`
   }
 
   &.orange {
-    background-color: #FFE4C2;
-    color: #FF6D00;
+    background-color: #ffe4c2;
+    color: #ff6d00;
   }
 
   &.green {
-    background-color: #B4FDD1;
-    color: #06B16E;
+    background-color: #b4fdd1;
+    color: #06b16e;
   }
 
   &.purple {
-    background-color: #E9D4FF;
-    color: #9A48F1;
+    background-color: #e9d4ff;
+    color: #9a48f1;
   }
 
   &.gray {
-    background: #94A6BE;
-    color: #FFFFFF;
+    background: #94a6be;
+    color: #ffffff;
   }
 `;

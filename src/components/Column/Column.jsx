@@ -1,3 +1,4 @@
+import { formatDateToDDMMYY } from "../../utils/dateToddmmyy";
 import { Card } from "../Card/Card";
 import * as S from "./Column.styled"
 
@@ -13,9 +14,9 @@ export const Column = ({ title, cards }) => {
         <Card
           key={card._id}
           id={card._id}
-          theme={card.theme}
+          theme={card.topic}
           title={card.title}
-          date={card.date}         
+          date={formatDateToDDMMYY(card.date)}         
         /> 
       ))} 
     </S.cards>

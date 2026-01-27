@@ -17,6 +17,53 @@ export const PopBrowse = ({ card, loading, id }) => {
     date: card?.date || "",
   });
 
+  const [errors, setErrors] = useState({
+    title: false,
+    topic: false,
+    description: false,
+    date: false,
+  });
+
+  const [error, setError] = useState("");
+
+  const validateForm = () => {
+    const newErrors = {
+      title: false,
+      topic: false,
+      description: false,
+      date: false,
+    };
+    let isValid = true;
+
+    const trimmedDescription = editData.description?.trim() || "";
+
+    if (!trimmedDescription) {
+      newErrors.description = true;
+      setError("Поле не может быть пустым или содержать только пробелы");
+      isValid = false;
+    } else if (trimmedDescription.length < 5) {
+      newErrors.description = true;
+      setError("Текст описания не может быть короче 5 символов");
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditData({
+      ...editData,
+      [name]: value,
+    });
+    setErrors({ ...errors, [name]: false });
+    const checkErrors = Object.values(errors).some(Boolean);
+    if (!checkErrors) {
+      setError("");
+    }
+  };
+
   const handleDelTask = async (e) => {
     e.preventDefault();
 
@@ -40,31 +87,67 @@ export const PopBrowse = ({ card, loading, id }) => {
   const handleCancelEdit = (e) => {
     e.preventDefault();
     setIsEdit(false);
+    setEditData({
+      title: card?.title || "",
+      topic: card?.topic || "",
+      status: card?.status || "",
+      description: card?.description || "",
+      date: card?.date || "",
+    });
+    setErrors({
+      title: false,
+      topic: false,
+      description: false,
+      date: false,
+    });
+    setError("");
   };
 
   const handleSaveEdit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
     try {
-    const taskData = {
-      title: card.title,
-      topic: card.topic,
-      status: editData.status,
-      description: editData.description,
-      date: card.date,
-    };
-    console.log("Отправляемые данные:", taskData);
+      const taskData = {
+        title: card.title,
+        topic: card.topic,
+        status: editData.status,
+        description: editData.description,
+        date: card.date,
+      };
+      console.log("Отправляемые данные:", taskData);
 
       await updateTask({
         id,
         task: taskData,
       });
- 
 
       setIsEdit(false);
     } catch (error) {
       console.error("Ошибка изменения задачи", error);
       alert("Не удалось изменить задачу");
     }
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    const hasChanges =
+      editData.status !== card?.status ||
+      editData.description !== card?.description;
+
+    if (isEdit && hasChanges) {
+      const userConfirmed = confirm(
+        "Вы внесли изменения. Действительно ли вы хотите закрыть карточку без сохранения?",
+      );
+
+      if (!userConfirmed) {
+        return;
+      }
+    }
+
+    navigate(-1);
   };
 
   return (
@@ -80,7 +163,11 @@ export const PopBrowse = ({ card, loading, id }) => {
               <>
                 <S.PopBrowseTopBlock>
                   <S.PopBrowseTitle>{card.title}</S.PopBrowseTitle>
-                  <S.CategoryTheme $orange $active className="theme-top">
+                  <S.CategoryTheme
+                    $theme={card.topic}
+                    $active
+                    className="theme-top"
+                  >
                     <p>{card.topic}</p>
                   </S.CategoryTheme>
                 </S.PopBrowseTopBlock>
@@ -99,6 +186,18 @@ export const PopBrowse = ({ card, loading, id }) => {
                           style={{ cursor: "pointer" }}
                         >
                           <p>Без статуса</p>
+                        </S.StatusTheme>
+                        <S.StatusTheme
+                          $gray={editData.status === "Нужно сделать"}
+                          onClick={() =>
+                            setEditData({
+                              ...editData,
+                              status: "Нужно сделать",
+                            })
+                          }
+                          style={{ cursor: "pointer" }}
+                        >
+                          <p>Нужно сделать</p>
                         </S.StatusTheme>
                         <S.StatusTheme
                           $gray={editData.status === "В работе"}
@@ -135,23 +234,20 @@ export const PopBrowse = ({ card, loading, id }) => {
                     )}
                   </S.StatusThemes>
                 </S.StatusWrapper>
+                
                 <S.PopBrowseWrap>
                   <S.PopBrowseForm id="formBrowseCard" action="#">
                     <S.FormBrowseBlock>
                       <label htmlFor="textArea01">
                         <S.Subtitle>Описание задачи</S.Subtitle>
                       </label>
+                      <S.error>{error}</S.error>
                       <S.FormBrowseArea
-                        name="text"
+                        $error={errors.description}
+                        name="description"
                         id="textArea01"
                         value={isEdit ? editData.description : card.description}
-                        onChange={(e) =>
-                          isEdit &&
-                          setEditData({
-                            ...editData,
-                            description: e.target.value,
-                          })
-                        }
+                        onChange={handleInputChange}
                         readOnly={!isEdit}
                         placeholder="Введите описание задачи..."
                       ></S.FormBrowseArea>
@@ -204,7 +300,9 @@ export const PopBrowse = ({ card, loading, id }) => {
                       </S.ButtonBrowse>
                     </S.ButtonGroup>
                     <S.ButtonBrowse>
-                      <Link to={-1}>Закрыть</Link>
+                      <a href="#" onClick={handleClose}>
+                        Закрыть
+                      </a>
                     </S.ButtonBrowse>
                   </S.ButtonActions>
                 )}

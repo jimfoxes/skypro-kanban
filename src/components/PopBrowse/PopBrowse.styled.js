@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+const themeColors = {
+  "Web Design": {
+    background: "#FFE4C2",
+    text: "#FF6D00",
+  },
+  Copywriting: {
+    background: "#E9D4FF",
+    text: "#9A48F1",
+  },
+  Research: {
+    background: "#BDFFDF",
+    text: "#06B16E",
+  },
+};
+
 export const PopBrowseWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -79,20 +94,8 @@ export const CategoryTheme = styled.div`
   border-radius: 24px;
   margin-right: 7px;
   opacity: ${(props) => (props.$active ? "1" : "0.4")};
-  background-color: ${(props) => {
-    if (props.$orange) return "#FFE4C2";
-    if (props.$green) return "#B4FDD1";
-    if (props.$purple) return "#E9D4FF";
-    if (props.$gray) return "#94A6BE";
-    return "transparent";
-  }};
-  color: ${(props) => {
-    if (props.$orange) return "#FF6D00";
-    if (props.$green) return "#06B16E";
-    if (props.$purple) return "#9A48F1";
-    if (props.$gray) return "#FFFFFF";
-    return "inherit";
-  }};
+  background-color: ${({ $theme }) => themeColors[$theme]?.background};
+  color: ${({ $theme }) => themeColors[$theme]?.text};
 
   p {
     font-size: 14px;
@@ -179,12 +182,15 @@ export const FormBrowseArea = styled.textarea`
   outline: none;
   padding: 14px;
   background: #eaeef6;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: 0.7px solid
+    ${(props) =>
+      props.$error ? "rgba(248, 77, 77, 0.8)" : "rgba(148, 166, 190, 0.4)"};
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-  margin-top: 14px;
+  margin-top: ${(props) =>
+      props.$error ? "2px" : "14px"};
   height: 200px;
 
   &::placeholder {
@@ -226,7 +232,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  
 
   @media screen and (max-width: 495px) {
     width: 100%;
@@ -240,7 +245,6 @@ export const ButtonGroup = styled.div`
   }
 `;
 
-
 export const ButtonBrowse = styled.button`
   height: 30px;
   padding: 0 14px;
@@ -251,10 +255,10 @@ export const ButtonBrowse = styled.button`
   background: ${(props) => (props.$bordered ? "transparent" : "#565EEF")};
   color: ${(props) => (props.$bordered ? "#565EEF" : "#FFFFFF")};
   cursor: pointer;
-  margin-right: ${props => props.$group ? '8px' : '0'};
+  margin-right: ${(props) => (props.$group ? "8px" : "0")};
   font-size: 14px;
   font-weight: 500;
-  
+
   a {
     color: ${(props) => (props.$bordered ? "#565EEF" : "#FFFFFF")};
     text-decoration: none;
@@ -285,4 +289,13 @@ export const LoadingText = styled.p`
   color: #000;
   text-align: center;
   padding: 20px;
+`;
+
+export const error = styled.p`
+  color: rgb(248, 77, 77);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  margin-top: 5px;
 `;
