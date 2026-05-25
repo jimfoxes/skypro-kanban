@@ -10,7 +10,16 @@ export const Main = () => {
   console.log(tasks)
 
   if (error) {
-    return <ErrorMessage>Ошибка загрузки данных</ErrorMessage>;
+    console.log(error, "jib,rf b vfqy")
+    return (
+      <S.main>
+        <Container>
+          <S.mainBlock>
+            <S.loadingText>Ошибка загрузки данных</S.loadingText>
+          </S.mainBlock>
+        </Container>
+      </S.main>
+    );
   }
   
   // Состояние загрузки

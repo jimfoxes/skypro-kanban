@@ -14,3 +14,67 @@ export async function fetchTasks({ token }) {
       throw new Error(error.message)
    }
 }
+
+export async function postTask({ token, task }) {
+   try {
+      const data = await axios.post(
+         API_URL,
+         task,
+         {
+            headers: {
+               Authorization: 'Bearer ' + token,
+               'Content-Type': '',
+            },
+         }
+      )
+      return data.data.tasks
+   } catch (error) {
+      throw new Error(error.message)
+   }
+}
+
+export async function getTask({ token, id }) {
+   try {
+      const data = await axios.get(`${API_URL}/${id}`, 
+         {
+         headers: {
+            Authorization: 'Bearer ' + token,
+         },
+      })
+      return data.data.task
+   } catch (error) {
+      throw new Error(error.message)
+   }
+}
+
+export async function editTask({ token, id, task }) {
+   try {
+      const data = await axios.put(
+         `${API_URL}/${id}`,
+         task,
+         {
+            headers: {
+               Authorization: 'Bearer ' + token,
+               'Content-Type': '',
+            },
+         }
+      )
+      return data.data.tasks
+   } catch (error) {
+      throw new Error(error.message)
+   }
+}
+
+export async function delTask({ token, id }) {
+   try {
+      const data = await axios.delete(`${API_URL}/${id}`, 
+         {
+         headers: {
+            Authorization: 'Bearer ' + token,
+         },
+      })
+      return data.data.tasks
+   } catch (error) {
+      throw new Error(error.message)
+   }
+}

@@ -74,7 +74,7 @@ export const input = styled.input`
   min-width: 100%;
   font-family: "Roboto", sans-serif;
   border-radius: 8px;
-  border: 0.7px solid ${props => props.$error ? "rgba(248, 77, 77, 0.8)" : "rgba(148, 166, 190, 0.4)"};
+  border: 0.7px solid ${(props) => props.$error ? "rgba(248, 77, 77, 0.8)" : "rgba(148, 166, 190, 0.4)"};
   outline: none;
   padding: 8px 8px;
   margin-bottom: 7px;
